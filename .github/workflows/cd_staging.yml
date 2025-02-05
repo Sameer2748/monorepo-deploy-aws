@@ -15,4 +15,4 @@ jobs:
           touch /home/runner/.ssh/known_hosts
           echo "${{secrets.KNOWN_HOSTS}}" &> /home/runner/.ssh/known_hosts
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/ssh_key ubuntu@ec2-3-109-122-201.ap-south-1.compute.amazonaws.com -t "cd monorepo-deploy-aws && git pull && pnpm install && pnpm run build && pm2 restart all"
+          ssh -i ~/ssh_key ubuntu@ec2-3-109-122-201.ap-south-1.compute.amazonaws.com -t "cd monorepo-deploy-aws && git pull && export PATH=/home/ubuntu/.nvm/versions/node/v22.13.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm i -g pnpm && pnpm install && pnpm run build && pm2 restart all"
