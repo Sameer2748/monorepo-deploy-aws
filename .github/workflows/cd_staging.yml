@@ -10,11 +10,11 @@ jobs:
     name: deploying everything to the staging machine
 
     steps:
-      - name: ssh in the staging machine
-      - run: |
-          echo ${{ secrets.PRIVATE_SSH_KEY}} &> ~/ssh_key
-          ssh -i ~/ssh_key ubuntu@ec2-3-109-122-201.ap-south-1.compute.amazonaws.com
-          cd monorepo-deploy-aws && git pull
-          pnpm install
-          pnpm run build 
-          pm2 restart all
+      name: ssh in the staging machine
+      run: |
+        echo ${{ secrets.PRIVATE_SSH_KEY}} &> ~/ssh_key
+        ssh -i ~/ssh_key ubuntu@ec2-3-109-122-201.ap-south-1.compute.amazonaws.com
+        cd monorepo-deploy-aws && git pull
+        pnpm install
+        pnpm run build 
+        pm2 restart all
