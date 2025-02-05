@@ -5,8 +5,8 @@ on:
       - "main"
 
 jobs:
-  uses: ubuntu-latest
   redeploy_everything:
+  runs-on: ubuntu-latest
     name: deploying everything to the staging machine
 
     steps:
