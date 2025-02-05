@@ -12,5 +12,5 @@ type user = {
 } | null;
 export default async function Home() {
   const user: user = await client.user.findFirst();
-  return <div>hello {user?.username}</div>;
+  return <div>hello {user?.username} Sameer</div>;
 }
