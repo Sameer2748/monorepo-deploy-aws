@@ -1,0 +1,18 @@
+name: deploy to staging
+on:
+  push:
+    branches: [prod]
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: deploying everything to the staging machine
+    steps:
+      - run: |
+          echo "${{secrets.PRIVATE_SSH_KEY}}" &> ~/ssh_key
+          mkdir -p /home/runner/.ssh
+          ls /home/runner/.ssh
+          touch /home/runner/.ssh/known_hosts
+          echo "${{secrets.KNOWN_HOSTS}}" &> /home/runner/.ssh/known_hosts
+          chmod 700 /home/runner/ssh_key
+          ssh -i ~/ssh_key ubuntu@ec2-3-110-136-210.ap-south-1.compute.amazonaws.com -t "cd monorepo-deploy-aws && git pull && export PATH=/home/ubuntu/.nvm/versions/node/v22.13.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm i -g pnpm && pnpm install && pnpm run build && pm2 restart all"
