@@ -6,7 +6,7 @@ on:
 
 jobs:
   redeploy_everything:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     name: deploying everything to the staging machine
 
     steps:
